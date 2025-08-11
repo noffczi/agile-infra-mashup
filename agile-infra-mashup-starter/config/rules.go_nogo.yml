@@ -1,0 +1,6 @@
+gates_required: 3
+min_impact: 2
+max_effort: 4
+auto_no_go_keywords:
+  - "not aligned"
+  - "requires unknown cloud"

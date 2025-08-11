@@ -1,0 +1,1 @@
+# Example Intake\n\nImpact: 4\nEffort: 2\n- [x] Aligns\n- [x] Feasible\n- [x] Security\n- [ ] Stakeholder\n

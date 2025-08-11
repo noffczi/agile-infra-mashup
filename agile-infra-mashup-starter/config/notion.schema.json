@@ -1,0 +1,12 @@
+{
+  "database_id": "PUT-YOUR-NOTION-DATABASE-ID-HERE",
+  "mappings": {
+    "title": "Name",
+    "status": "Status",
+    "priority": "Priority",
+    "impact": "Impact",
+    "effort": "Effort",
+    "deadline": "Deadline",
+    "github_issue": "GitHub Issue"
+  }
+}

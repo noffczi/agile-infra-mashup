@@ -1,0 +1,13 @@
+priority:
+  critical:
+    conditions:
+      - "impact>=5"
+      - "contains:regulatory|outage"
+  urgent:
+    conditions:
+      - "impact>=4"
+  high:
+    conditions:
+      - "impact>=3"
+  day2:
+    default: true

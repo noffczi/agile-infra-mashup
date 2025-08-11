@@ -1,0 +1,8 @@
+board_id: PUT-YOUR-TRELLO-BOARD-ID
+lists:
+  intake: PUT-LIST-ID
+  needs_info: PUT-LIST-ID
+  go: PUT-LIST-ID
+  no_go: PUT-LIST-ID
+  prioritized: PUT-LIST-ID
+  day2: PUT-LIST-ID
