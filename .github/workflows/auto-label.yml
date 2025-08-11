@@ -12,14 +12,23 @@ jobs:
   add-default-labels:
     runs-on: ubuntu-latest
     steps:
-      - name: Add labels to the new issue
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const issue_number = context.payload.issue.number;
-            await github.rest.issues.addLabels({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number,
-              labels: ['triage', 'needs-review']
-            });
+      - name: Add labels only if missing
+  uses: actions/github-script@v7
+  with:
+    script: |
+      const wanted = ['triage','needs-review'];
+      const { data: current } = await github.rest.issues.listLabelsOnIssue({
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        issue_number: context.payload.issue.number
+      });
+      const have = new Set(current.map(l => l.name));
+      const toAdd = wanted.filter(l => !have.has(l));
+      if (toAdd.length) {
+        await github.rest.issues.addLabels({
+          owner: context.repo.owner,
+          repo: context.repo.repo,
+          issue_number: context.payload.issue.number,
+          labels: toAdd
+        });
+      }
