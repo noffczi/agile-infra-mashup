@@ -5,30 +5,28 @@ on:
     types: [opened, reopened]
 
 permissions:
-  issues: write
   contents: read
+  issues: write
 
 jobs:
   add-default-labels:
     runs-on: ubuntu-latest
     steps:
       - name: Add labels only if missing
-  uses: actions/github-script@v7
-  with:
-    script: |
-      const wanted = ['triage','needs-review'];
-      const { data: current } = await github.rest.issues.listLabelsOnIssue({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        issue_number: context.payload.issue.number
-      });
-      const have = new Set(current.map(l => l.name));
-      const toAdd = wanted.filter(l => !have.has(l));
-      if (toAdd.length) {
-        await github.rest.issues.addLabels({
-          owner: context.repo.owner,
-          repo: context.repo.repo,
-          issue_number: context.payload.issue.number,
-          labels: toAdd
-        });
-      }
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue_number = context.payload.issue.number;
+
+            const wanted = ['triage','needs-review'];
+            const { data: current } = await github.rest.issues.listLabelsOnIssue({ owner, repo, issue_number });
+            const have = new Set(current.map(l => l.name));
+            const toAdd = wanted.filter(l => !have.has(l));
+
+            if (toAdd.length) {
+              await github.rest.issues.addLabels({ owner, repo, issue_number, labels: toAdd });
+            } else {
+              core.info('No new labels to add.');
+            }
