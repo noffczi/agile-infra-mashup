@@ -233,3 +233,7 @@ gitleaks.tar.gz
 gitleaks.sarif
 gitleaks.json
 
+/gitleaks
+gitleaks.tar.gz
+gitleaks.sarif
+gitleaks.json
