@@ -227,3 +227,9 @@ Assets/raw/
 *.psd
 *.ai
 *.sketch
+
+/gitleaks
+gitleaks.tar.gz
+gitleaks.sarif
+gitleaks.json
+
